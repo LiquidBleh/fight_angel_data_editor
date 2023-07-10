@@ -44,15 +44,23 @@ namespace Fight_Angel_Data_Editor
 
         private void b_scaler_run(object sender, RoutedEventArgs e)
         {
-            error_label.Content = "Working...";
-            manipulate_breast_max_scaling();
-            error_label.Content = "Success";
+            if (manipulate_breast_max_scaling())
+            {
+                error_label.Content = "Success";
+            }
+            
             e.Handled = true;
         }
 
-        private void manipulate_breast_max_scaling()
+        private bool manipulate_breast_max_scaling()
         {
             var file_name = get_file_name();
+            if (!System.IO.File.Exists(file_name))
+            {
+                error_label.Content = "invalid data path";
+                return false;
+            }
+            
             var blob = load_save_file(file_name);
 
             byte[] tag =
@@ -141,6 +149,7 @@ namespace Fight_Angel_Data_Editor
 
             var new_blob = manipulateBytes(blob, tag, mask, next, patch);
             writeSaveFile(new_blob);
+            return true;
         }
 
         private byte[] manipulateBytes(byte[] blob, byte[] tag, byte[] mask, byte[] nextTag, byte[] patch)
@@ -173,7 +182,8 @@ namespace Fight_Angel_Data_Editor
 
         private String get_file_name()
         {
-            return "m:\\tmp\\test_data\\resources.assets";
+            return data_path.Text + "\\resources.assets";
+
         }
         private byte[] load_save_file(string file_name)
         {

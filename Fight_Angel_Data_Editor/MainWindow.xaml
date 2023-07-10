@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:Fight_Angel_Data_Editor"
         mc:Ignorable="d"
         Title="MainWindow" Height="182" Width="729">
-    <Grid Margin="0,0,366,0">
-        <StackPanel Margin="115,10,19,10">
+    <Grid>
+        <StackPanel Margin="0,10,19,0">
+            <Label Content="Path to game data folder" Width="240"/>
+            <TextBox Name="data_path">C:\Program Files\Steam\steamapps\common\Fight AngelSE\FightAngelSE_Data</TextBox>
             <Label Content="Multiply default max breast size times 1.6" Width="240"/>
             <Button x:Name="b_scaler" Background="LightGray"
                             BorderBrush="Black" BorderThickness="0" 
